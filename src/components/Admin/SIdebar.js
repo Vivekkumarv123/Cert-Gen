@@ -75,7 +75,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <div className="flex justify-between text-gray-400">
             <div>
               <p>Total Certificates</p>
-              <p className="text-white text-xl font-bold">152</p>
+              <p className="text-white text-xl font-bold">8</p>
             </div>
             <div>
               <p>New This Week</p>
