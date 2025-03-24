@@ -36,6 +36,10 @@ export default function LoginPage() {
     }
   };
 
+  const handleBack = () => {
+    router.push("/"); // Redirect to the admin panel
+  };
+
   return (
     <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-purple-600 p-4">
       <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-3xl">
@@ -92,6 +96,14 @@ export default function LoginPage() {
               Login
             </button>
           </form>
+
+          {/* Back Button */}
+          <button
+            onClick={handleBack}
+            className="w-full mt-4 bg-gray-500 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transition duration-300"
+          >
+            Back to Home Page
+          </button>
         </div>
       </div>
     </div>
