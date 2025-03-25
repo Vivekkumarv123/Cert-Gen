@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image"; // Correct import for Image component
 
 export default function ViewCertificatePage() {
   const [certificateId, setCertificateId] = useState("");
@@ -26,10 +27,10 @@ export default function ViewCertificatePage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 py-4">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md sm:max-w-lg lg:max-w-4xl">
         {/* ✅ Title */}
-        <h2 className="text-2xl font-bold mb-4 text-center">
+        <h2 className="text-2xl font-bold mb-4 text-center md:text-3xl">
           View Certificate
         </h2>
 
@@ -60,25 +61,53 @@ export default function ViewCertificatePage() {
 
         {/* ✅ Display Certificate */}
         {certificate && (
-          <div className="mt-6 p-4 border border-gray-300 rounded-lg bg-gray-50">
-            <h3 className="text-lg font-semibold">
-              Certificate for {certificate.recipientName || "N/A"}
-            </h3>
-            <p className="text-gray-600">
-              Course: {certificate.courseName || "N/A"}
-            </p>
-            <p className="text-gray-600">
-              Internship Type: {certificate.internshipType || "N/A"}
-            </p>
-            <p className="text-gray-600">
-              Issued on:{" "}
-              {certificate.date
-                ? new Date(certificate.date).toLocaleDateString()
-                : "N/A"}
-            </p>
-            <p className="text-gray-600">
-              Cert-id: {certificateId || "N/A"}
-            </p>
+          <div className="flex-1 p-8 mt-8 bg-white rounded-lg shadow-lg">
+            <h1 className="text-3xl font-bold text-center mb-8 border-b-2 pb-4">
+              Certificate of Completion
+            </h1>
+            <div className="text-center space-y-6">
+              <p className="text-xl md:text-2xl">
+                This is to certify that{" "}
+                <span className="font-bold text-2xl">{certificate.recipientName || "N/A"}</span>
+              </p>
+              <p className="text-xl md:text-2xl">
+                has successfully completed the{" "}
+                <span className="font-bold">{certificate.internshipType || "N/A"}</span> in
+              </p>
+              <p className="text-3xl font-bold text-blue-600">{certificate.courseName || "N/A"}</p>
+              <div className="mt-8">
+                <p className="text-lg md:text-xl">Completed on</p>
+                <p className="text-xl md:text-2xl font-semibold">
+                  {certificate.date
+                    ? new Date(certificate.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
+                    : "N/A"}
+                </p>
+              </div>
+              <div className="mt-12 flex justify-between items-center px-8 md:px-12">
+                {/* ✅ Signature */}
+                <div className="text-left">
+                  <div className="border-b-2 border-black w-32 mt-2">
+                    <Image
+                      src="/sign.png"
+                      alt="Signature"
+                      width={1000}
+                      height={1000}
+                      className="w-[100px] h-[50px]"
+                    />
+                  </div>
+                  <p className="text-sm mt-2">Authorized Signature</p>
+                </div>
+                {/* ✅ Certificate ID */}
+                <div className="text-right">
+                  <p className="text-sm">Certificate ID:</p>
+                  <p className="font-mono">{certificateId || "N/A"}</p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
